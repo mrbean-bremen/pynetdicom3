@@ -41,9 +41,9 @@ class TestTimer(unittest.TestCase):
         timer.timeout_seconds = 0.2
         timer.start()
         time.sleep(0.1)
-        self.assertTrue(timer.time_remaining < 0.1)
+        self.assertAlmostEqual(0.1, timer.time_remaining, 3)
         self.assertFalse(timer.is_expired)
-        time.sleep(0.1)
+        time.sleep(0.101)
         self.assertTrue(timer.is_expired)
 
         timer.timeout_seconds = None
@@ -66,7 +66,7 @@ class TestTimer(unittest.TestCase):
         timer.restart()
         time.sleep(0.15)
         self.assertFalse(timer.is_expired)
-        time.sleep(0.05)
+        time.sleep(0.051)
         self.assertTrue(timer.is_expired)
 
 

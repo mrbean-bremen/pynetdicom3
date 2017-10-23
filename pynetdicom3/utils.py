@@ -229,12 +229,12 @@ class PresentationContext(object):
         elif isinstance(transfer_syntax, bytes):
             transfer_syntax = UID(transfer_syntax.decode('utf-8'))
         else:
-            raise TypeError('transfer_syntax must be a pydicom.uid.UID,' \
-                             ' bytes or str')
+            raise TypeError('transfer_syntax must be a pydicom.uid.UID,'
+                            ' bytes or str')
 
-        if transfer_syntax not in self.TransferSyntax and \
-                                                    transfer_syntax != '':
-            if not  transfer_syntax.is_valid:
+        if (transfer_syntax not in self.TransferSyntax and
+                transfer_syntax != '' and transfer_syntax != 'unknown'):
+            if not transfer_syntax.is_valid:
                 raise ValueError('Presentation Context attempted to add a '
                                  'invalid UID')
             # Issue #62: private transfer syntaxes may be used
